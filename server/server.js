@@ -80,10 +80,8 @@ const PORT = process.env.PORT || 5000;
 const startServer = async () => {
   const connected = await connectDB();
 
-  // On Render (production), exit if DB cannot connect — Render will restart the service
-  if (!connected && process.env.NODE_ENV === 'production') {
-    console.error('[FreelanceScope] Cannot start server without database in production. Exiting.');
-    process.exit(1);
+  if (!connected) {
+    console.error('[FreelanceScope] WARNING: Starting server without database connection.');
   }
 
   if (require.main === module) {
